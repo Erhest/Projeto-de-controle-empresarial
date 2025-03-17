@@ -1,95 +1,45 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import Link from 'next/link'
+import { Container, Typography, Card, CardContent, Button, Stack } from '@mui/material'
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Card sx={{ backgroundColor: 'background.paper', p: 3, boxShadow: 3, borderRadius: 2 }}>
+        <CardContent>
+          <Typography variant="h4" color="primary" gutterBottom align="center">
+            Controle de Horas por Projeto
+          </Typography>
+          <Typography variant="body1" color="secondary" gutterBottom align="center">
+            Escolha uma das opções abaixo:
+          </Typography>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          <Stack spacing={2} mt={2}>
+            <Button variant="contained" color="primary" component={Link} href="/cadastroDeProfissional">
+              Cadastrar Profissional
+            </Button>
+            <Button variant="contained" color="secondary" component={Link} href="/cadastroDeProjeto">
+              Cadastrar Projeto
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: '#1976d2', color: '#fff', '&:hover': { backgroundColor: '#1565c0' } }}
+              component={Link}
+              href="/profissional"
+            >
+              Lista de Profissionais
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: '#d32f2f', color: '#fff', '&:hover': { backgroundColor: '#b71c1c' } }}
+              component={Link}
+              href="/projetos"
+            >
+              Lista de Projetos
+            </Button>
+          </Stack>
+        </CardContent>
+      </Card>
+    </Container>
+  )
 }
