@@ -25,7 +25,7 @@ export default function Home() {
               variant="contained"
               sx={{ backgroundColor: '#1976d2', color: '#fff', '&:hover': { backgroundColor: '#1565c0' } }}
               component={Link}
-              href="/profissional"
+              href="/professional" 
             >
               Lista de Profissionais
             </Button>

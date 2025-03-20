@@ -1,19 +1,26 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Container, Typography, TextField, Button, Stack } from '@mui/material'
+import { Container, TextField, Button, Typography } from '@mui/material'
 
 export default function CadastroProjeto() {
+  const router = useRouter()
   const [nome, setNome] = useState('')
   const [descricao, setDescricao] = useState('')
-  const router = useRouter()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const projetos = JSON.parse(localStorage.getItem('projetos')) || []
-    projetos.push({ nome, descricao, profissionais: [] })
-    localStorage.setItem('projetos', JSON.stringify(projetos))
-    router.push('/projetos')
+    const novoProjeto = { nome, descricao }
+
+    const storedProjetos = JSON.parse(localStorage.getItem('projetos')) || []
+    storedProjetos.push(novoProjeto)
+    localStorage.setItem('projetos', JSON.stringify(storedProjetos))
+
+    setNome('')
+    setDescricao('')
+
+    // Redirecionar para a página principal
+    router.push('/')
   }
 
   return (
@@ -22,13 +29,35 @@ export default function CadastroProjeto() {
         Cadastrar Projeto
       </Typography>
 
-      <Stack spacing={2} component="form" onSubmit={handleSubmit}>
-        <TextField label="Nome do Projeto" fullWidth required value={nome} onChange={(e) => setNome(e.target.value)} />
-        <TextField label="Descrição" fullWidth required value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-        <Button type="submit" variant="contained" color="primary">
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Nome do Projeto"
+          fullWidth
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          required
+          sx={{ mb: 2 }}
+        />
+
+        <TextField
+          label="Descrição"
+          fullWidth
+          multiline
+          rows={3}
+          value={descricao}
+          onChange={(e) => setDescricao(e.target.value)}
+          required
+          sx={{ mb: 2 }}
+        />
+
+        <Button type="submit" variant="contained" color="primary" fullWidth>
           Cadastrar
         </Button>
-      </Stack>
+
+        <Button variant="outlined" color="secondary" fullWidth sx={{ mt: 2 }} onClick={() => router.push('/')}>
+          Voltar para a Página Principal
+        </Button>
+      </form>
     </Container>
   )
 }
